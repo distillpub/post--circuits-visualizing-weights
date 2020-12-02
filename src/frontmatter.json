@@ -1,0 +1,25 @@
+{
+	"title": "High/Low frequency detectors",
+	"description": "A family of early-vision filters reacting to contrasts between spatial gratings of different frequency",
+	"password": "hilo",
+	"authors": [
+		{
+			"author": "Chris Olah",
+			"affiliation": "OpenAI"
+		}
+	],
+	"katex": {
+		"delimiters": [
+			{
+				"left": "$",
+				"right": "$",
+				"display": false
+			},
+			{
+				"left": "$$",
+				"right": "$$",
+				"display": true
+			}
+		]
+	}
+}

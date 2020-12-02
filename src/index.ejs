@@ -1,0 +1,314 @@
+<!doctype html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style id="distill-article-specific-styles">
+    <%=require("../static/styles.css") %>
+  </style>
+  <script src="https://distill.pub/template.v2.js"></script>
+</head>
+
+<body>
+  <d-front-matter>
+    <script type="text/json">
+      <%= JSON.stringify(require("./frontmatter.json"), null, 4) %>
+    </script>
+  </d-front-matter>
+
+  <style>
+  .header-self-link {
+    border-bottom: none;
+  }
+  .header-self-link:hover {
+    border-bottom: none;
+  }
+  </style>
+
+  <d-title>
+    <h1>Visualizing Weights</h1>
+  </d-title>
+
+  <d-article>
+
+    <h2 style="display: none;">Introduction</h2>
+
+    <p><a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_">Follow along in a Colab notebook.</a>
+
+    <p>The problem of understanding a neural network is a little bit like reverse engineering a large compiled binary of a computer program. In this analogy, the weights of the neural network are the compiled assembly instructions. At the end of the day, the weights are the fundamental thing you want to understand: how does this sequence of convolutions and matrix multiplications give rise to model behavior?</p>
+
+    <p>Trying to understand artificial neural networks also has a lot in common with neuroscientists, who try to understand biological neural networks. As you may know, a major endeavor in modern neuroscience is trying to map the “connectome” of biological neural networks: which neurons connect to which. But that will only tell neuroscientists which weights are non-zero. Getting the weights &ndash; knowing whether a connection excites or inhibits, and by how much &ndash; would be a significant further step. One imagines neuroscientists would give a great deal to have the access to weights that those of us studying artificial neural networks get for free.</p>
+
+    <p>And so, it’s rather surprising how little attention we actually give to looking at the weights of neural networks. There are a few exceptions to this, of course. It’s quite common for researchers to show pictures of the first layer weights in vision models (these are directly connected to RGB channels, so they’re easy to understand as images). In some work, especially historically, we see researchers reason about the weights of toy neural networks by hand. And we quite often see researchers discuss aggregate statistics of weights. But actually looking at the weights of a neural network other than the first layer is quite uncommon &ndash; to the best of our knowledge, mapping weights between hidden layers to meaningful algorithms is novel to the circuits project.</p>
+
+    <h2>What's the difference between visualizing activations, weights, and attributions?</h2>
+
+    <p>In this article, we’re focusing on visualizing weights. But people often visualize activations, attributions, gradients, and much more. How should we think about the meaning of visualizing these different objects?</p>
+
+    <ul>
+      <li>
+        <b>Activations:</b> We generally think of these as being “what” the network saw. If understanding a neural network is like reverse compiling a computer program, the neurons are the variables, and the activations are the values of those variables.
+      </li>
+      <li>
+        <b>Weights:</b> We generally think of these as being “how” the neural network computes one layer from the previous one. In the reverse engineering analogy, these are compiled assembly instructions.
+      </li>
+      <li>
+        <b>Attributions:</b> Attributions try to tell us the extent to which one neuron influenced a later neuron. We often think of this as “why” the neuron fired. We need to be careful with attributions, because they’re a human-defined object on top of a neural network rather than a fundamental object. They aren’t always well defined, and people mean different things by them. (They are very well defined if you are only operating across adjacent layers!)
+      </li>
+    </ul>
+
+    <h2>Why it’s non-trivial to study weights in hidden layers</h2>
+
+    <p>It seems to us that there are three main barriers to making sense of the weights in neural networks, which may have contributed to researchers tending to not directly inspect them:</p>
+
+    <ul>
+      <li>
+        <b>Lack of Contextualization:</b> Researchers often visualize weights in the first layer, because they are linked to RGB values that we understand. That connection makes weights in the first layer meaningful. But weights between hidden layers are meaningless by default: knowing nothing about either the source or the destination, how can we make sense of them?
+      </li>
+      <li>
+        <b>Indirect Interaction:</b> Sometimes, the meaningful weight interactions are between neurons which aren’t literally adjacent in a neural network. For example, in a residual network, the output of one neuron can pass through the additive residual stream and linearly interact with a neuron much later in the network. In other cases, neurons may interact through intermediate neurons without significant nonlinear interactions. How can we efficiently reason about these interactions?
+      </li>
+      <li>
+        <b>Dimensionality and Scale:</b> Neural networks have lots of neurons. Those neurons connect to lots of other neurons. There’s a lot of data to display! How can we reduce it to a human-scale amount of information?
+      </li>
+    </ul>
+
+    <p>Many of the methods we’ll use to address these problems were previously explored in <a href="https://distill.pub/2018/building-blocks/">Building Blocks</a> in the context of understanding activation vectors. The goal of this article is to show how similar ideas can be applied to weights instead of activations. Of course, we’ve already implicitly used these methods in various circuit articles, but in those articles the methods have been of secondary interest to the results. It seems useful to give some dedicated discussion to the methods.</p>
+
+    <h2>Aside: One Simple Trick</h2>
+
+    <p>Interpretability methods often fail to take off because they’re hard to use. So before diving into sophisticated approaches, we wanted to offer a simple, easy to apply method.</p>
+
+    <p>In a convolutional network, the input weights for a given neuron have shape <code>[width, height, input_channels]</code>. Unless this is the first convolutional layer, this probably can’t be easily visualized because input_channels is large. (If this is the first convolutional layer, visualize it as is!) However, one can use dimensionality reduction to collapse input_channels down to 3 dimensions. We find one-sided NMF especially effective for this.</p>
+
+    <figure id="figure-1">
+      <img src="images/screenshot_1.png" />
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-1" class="figure-number">1</a>:
+          NMF of unit weights in InceptionV1 mixed4d_5x5 &ndash; <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=RHj5ZKx9Y1jX">see in colab</a>
+      </p>
+      </figcaption>
+    </figure>
+
+    <p>This visualization doesn’t tell you very much about what your weights are doing in the context of the larger model, but it does show you that they are learning nice spatial structures. This can be an easy sanity check that your neurons are learning, and a first step towards understanding your neurons behavior. We’ll also see later that this general approach of factoring weights can be extended into a powerful tool for studying neurons.</p>
+
+    <p>One thing you may quickly discover using this method is that, in models with global average pooling at the end of their convolutional layers, the last few layers will have all their weights be horizontal bands.</p>
+
+    <figure id="figure-2">
+      <img src="images/screenshot_2.png" />
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-2" class="figure-number">2</a>:
+          Weight banding in InceptionV1 mixed5b_5x5
+      </p>
+      </figcaption>
+    </figure>
+
+    <p>We call this phenomenon <i>weight banding</i>, and a detailed article by Petrov et al. is forthcoming (draft available on request).</p>
+
+    <h2>Contextualizing Weights with Feature Visualization</h2>
+
+    <p>Of course, looking at weights in a vacuum isn’t very interesting. In order to really understand what’s going on, we need to <i>contextualize</i> weights in the broader context of the network. The challenge of contextualization is a recurring challenge in understanding neural networks: we can easily observe every activation, every weight, and every gradient; the challenge lies in determining what those values represent.</p>
+
+    <p>Recall that the weights between two convolutional layers are a four dimensional array of the shape:</p>
+
+    <p><code>[relative x position, relative y position,
+    input channels, output channels]</code></p>
+
+    <p>If we fix the input channel and the output channel, we get a 2d array we can present with traditional data visualization. Let’s assume we know which neuron we’re interested in understanding, so we have the output channel. We can pick the input channels with high magnitude weights to our output channel.</p>
+
+    <p>But what does the input represent? What about the output?</p>
+
+    <p>The key trick is that techniques like feature visualization (or deeper investigations of neurons) can help us understand what the input and output neurons represent, contextualizing the graph. Feature visualizations are especially attractive because they’re automatic, and produce a single image which is often very informative about the neuron. As a result, we often represent neurons as feature visualizations in weight diagrams.</p>
+
+    <figure id="figure-3">
+      <img src="images/screenshot_3.png" />
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-3" class="figure-number">3</a>:
+          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=PoMQF4UtPcAJ">See example in Colab</a>.
+      </p>
+      </figcaption>
+    </figure>
+
+    <p>This approach is the weight analogue of using feature visualizations to contextualize activation vectors in Building Blocks (see the section titled “Making Sense of Hidden Layers”).</p>
+
+    <p>While we aren’t experts, it seems like this might be similar to reverse engineering a normal compiled computer program. Since you can’t hold everything in your head at once, you need to start assigning variable names to the values stored in registers to keep track of them. Feature visualizations are essentially automatic variable names for neurons, which are roughly analogous to registers or variables.</p>
+
+    <h3>Small Multiples</h3>
+
+    <p>Of course, neurons have multiple inputs, and it can be helpful to show the weights to several inputs at a time as a <a href="https://en.wikipedia.org/wiki/Small_multiple">small multiple</a>:</p>
+
+    <figure id="figure-4">
+      <img src="images/screenshot_4.png" />
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-4" class="figure-number">4</a>:
+          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=PoMQF4UtPcAJ">See example in Colab</a>.
+      </p>
+      </figcaption>
+    </figure>
+
+    <p>And if we have two families of related neurons interacting, it can sometimes even be helpful to show the weights between all of them as a grid of small multiples:</p>
+
+    <figure id="figure-5">
+      <img src="images/screenshot_5.png" />
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-5" class="figure-number">5</a>.
+      </p>
+      </figcaption>
+    </figure>
+
+    <h2>Advanced Approaches to Contextualization with Feature Visualization</h2>
+
+    <p>Although we most often use feature visualization to visualize neurons, we can visualize any direction (linear combination of neurons). This opens up a very wide space of possibilities for visualizing weights, of which we’ll explore a couple particularly useful ones.</p>
+
+    <h3>Visualizing Spatial Position Weights</h3>
+
+    <p>Recall that the weights for a single neuron have shape <code>[width, height, input_channels]</code>. In the previous section we split up <code>input_channels</code> and visualized each <code>[width, height]</code> matrix. But an alternative approach is to think of there as being a vector over input neurons at each spatial position, and to apply feature visualization to each of those vectors. You can think of this as telling us what the weights in that position are collectively looking for.</p>
+
+    <figure id="figure-6">
+      <img src="images/screenshot_6.png" />
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-6" class="figure-number">6</a>.
+          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=K8URGsjLmuUj">See in Colab</a>.
+      </p>
+      </figcaption>
+    </figure>
+
+    <p>This visualization is the weight analogue of the <a href="https://distill.pub/2018/building-blocks/#ActivationVecVis">“Activation Grid” visualization</a> from Building Blocks. It can be a nice, high density way to get an overview of what the weights for one neuron are doing. However, it will be unable to capture cases where one position responds to multiple very different things, as in a multi-faceted or polysemantic neuron.</p>
+
+    <h3>Visualizing Weight Factors</h3>
+
+    <p>Feature visualization can also be applied to factorizations of the weights, which we briefly discussed earlier. This is the weight analogue to the “Neuron Groups” visualization from Building Blocks.</p>
+
+    <p>This can be especially helpful when you have a group of neurons like high-low frequency detectors or black and white vs color detectors that look are all mostly looking for a small number of factors. For example, a large number of high-low frequency detectors can be significantly understood as combining just two factors &ndash; a high frequency factor and a low-frequency factor &ndash; in different patterns.</p>
+
+    <figure id="figure-7">
+      <img src="images/screenshot_7.png" />
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-7" class="figure-number">7</a>.
+          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=Z5Y7dAQZZAEf">See in Colab</a>.
+      </p>
+      </figcaption>
+    </figure>
+
+    <p>These factors can then be decomposed into individual neurons for more detailed understanding.</p>
+
+    <figure id="figure-8">
+      <img src="images/screenshot_8.png" />
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-8" class="figure-number">8</a>.
+          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=Z5Y7dAQZZAEf">See in Colab</a>.
+      </p>
+      </figcaption>
+    </figure>
+
+    <h2>Dealing with Indirect Interactions</h2>
+
+    <p>As we mentioned earlier, sometimes the meaningful weight interactions are between neurons which aren’t literally adjacent in a neural network, or where the weights aren’t directly represented in a single weight tensor. A few examples:</p>
+
+    <ul>
+      <li>In a residual network, the output of one neuron can pass through the additive residual stream and linearly interact with a neuron much later in the network.</li>
+      <li>In a separable convolution, weights are stored as two or more factors, and need to be expanded to link neurons.</li>
+      <li>In a bottleneck architecture, neurons in the bottleneck may primarily be a low-rank projection of neurons from the previous layer.</li>
+      <li>The behavior of an intermediate layer simply doesn’t introduce much non-linear behavior, leaving two neurons in non-adjacent layers with a significant linear interaction.</li>
+    </ul>
+
+    <p>As a result, we often work with “expanded weights” &ndash; that is, the result of multiplying adjacent weight matrices, potentially ignoring non-linearities. We generally implement expanded weights by taking gradients through our model, ignoring or replacing all non-linear operations with the closest linear one.</p>
+
+    <p>These expanded weights have the following properties:</p>
+
+    <ul>
+      <li>If two layers interact <b>linearly</b>, the expanded weights will give the true linear map, even if the model doesn’t explicitly represent the weights in a single weight matrix.</li>
+      <li>If two layers interact <b>non-linearly</b>, the expanded weights can be seen as the expected value of the gradient up to a constant factor, under the assumption that all neurons have an equal (and independent) probability of firing.</li>
+    </ul>
+
+    <p>They also have one additional benefit, which is more of an implementation detail: because they’re implemented in terms of gradients, you don’t need to know how the weights are represented. For example, in TensorFlow, you don’t need to know which variable object represents the weights. This can be a significant convenience when you’re working with unfamiliar models!</p>
+
+    <h3>Benefits of Expanded Weights</h3>
+
+    <p>Multiplying out the weights like this can sometimes help us see a simpler underlying structure. For example, 3b:208 is a black and white center detector. It’s built by combining a bunch of black and white vs color detectors.</p>
+
+    <figure id="figure-9">
+      <img src="images/screenshot_9.png" />
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-9" class="figure-number">9</a>.
+        </p>
+      </figcaption>
+    </figure>
+
+    <p>Expanding out the weights allows us to see an important aggregate effect of these connections: together, they look for the absence of color in the center one layer further back:</p>
+
+    <figure id="figure-10">
+      <img src="images/screenshot_10.png" />
+      <img src="images/screenshot_10b.png" />
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-10" class="figure-number">10</a>.
+        </p>
+      </figcaption>
+    </figure>
+
+    <p>A particularly important use of this method &ndash; which we’ve been implicitly using in earlier examples &ndash; is to jump over “bottleneck layers.” Bottleneck layers are layers of the network which squeeze the number of channels down to a much smaller number, typically in a branch, making large spatial convolutions cheaper. Since so much information is compressed, these layers are often polysemantic, and it can often be more helpful to jump over them and understand the connection to the wider layer before them.</p>
+
+    <h3>Cases where expanded weights are misleading</h3>
+
+    <p>Expanded weights can, of course, be misleading when non-linear structure is important. A good example of this is boundary detectors. Recall that boundary detectors usually detect both low-to-high and high-to-low frequency transitions:</p>
+
+    <figure id="figure-11">
+      <img src="images/screenshot_11.png" />
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-11" class="figure-number">11</a>.
+        </p>
+      </figcaption>
+    </figure>
+
+    <p>Since high-low frequency detectors are usually excited by high-frequency patterns on one side and inhibited on the other (and vice versa for low frequency), detecting both directions means that the expanded weights cancel out! As a result, expanded weights appear to show that boundary detectors are neither excited or inhibited by high frequency detectors two layers back, when in fact they are <i>both</i> excited and also inhibited by high frequency, depending on the context, and it’s just that those two different cases cancel out.</p>
+
+    <p>More sophisticated techniques for describing multi-layer interactions can help us understand cases like this. For example, one can determine what the “best case” excitation interaction between two neurons is (that is, the maximum achievable gradient between them). Or you can look at the gradient for a particular example. Or you can factor the gradient over many examples to determine major possible cases. These are all useful techniques, but we’ll leave them for a future article to discuss.</p>
+
+    <h3>Qualitative properties</h3>
+
+    <p>One qualitative property of expanding weights across many layers deserves mention before we end our discussion of them. Expanded weights often get this kind of “electron orbital”-like smooth spatial structures:</p>
+
+    <figure id="figure-12">
+      <img src="images/screenshot_12.png" />
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-12" class="figure-number">12</a>.
+        </p>
+      </figcaption>
+    </figure>
+
+    <p>It’s not clear how to interpret this, but it’s suggestive of rich spatial structure on the scale of multiple layers.</p>
+
+    <h2>Dimensionality and Scale</h2>
+
+    <p>So far, we’ve addressed the challenges of contextualization and indirection interactions. But we’ve only given a bit of attention to our third challenge of dimensionality and scale. Neural networks contain many neurons and each one connects to many others, creating a huge amount of weights. How do we pick which connections between neurons to look at?</p>
+
+    <p>For the purposes of this article, we’ll put the question of which neurons we want to study outside of our scope, and only discuss the problem of picking which connections to study. (We may be trying to comprehensively study a model, in which case we want to study all neurons. But we might also, for example, be trying to study neurons we’ve determined related to some narrower aspect of model behavior.)</p>
+
+    <p>Generally, we chose to look at the largest weights, as we did at the beginning of the section on contextualization. Unfortunately, there tends to be a long tail of small weights, and at some point it generally gets impractical to look at these. How much of the story is really hiding in these small weights? We don’t know, but polysemantic neurons suggest there could be a very important and subtle story hiding here! There’s some hope that sparse neural networks might make this much better, by getting rid of small weights, but that’s presently speculative.</p>
+
+    <p>An alternative strategy that we’ve brushed on a few times is to reduce your weights into a few components and then study those factors (for example, with NMF). Often, a very small number of components can explain much of the variance. In fact, sometimes a small number of factors can explain the weights of an entire set of neurons! Prominent examples  of this are high-low frequency detectors (as we saw earlier) and black and white vs color detectors.</p>
+
+    <p>However, this approach also has downsides. Firstly, these components can be harder to understand and even polysemantic. For example, if you apply the basic version of this method to a boundary detector, one component will contain both high-to-low and low-to-high frequency detectors which will make it hard to analyze. Secondly, your factors no longer align with activation functions, which makes analysis much messier. Finally, because you will be reasoning about every neuron in a different basis, it is difficult to build a bigger picture view of the model unless you convert your components back to neurons.</p>
+
+  </d-article>
+
+  <d-appendix>
+    <d-footnote-list></d-footnote-list>
+    <d-citation-list></d-citation-list>
+  </d-appendix>
+
+  <d-bibliography src="bibliography.bib"></d-bibliography>
+
+</body>
