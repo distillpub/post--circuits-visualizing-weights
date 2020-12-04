@@ -23,6 +23,37 @@
   .header-self-link:hover {
     border-bottom: none;
   }
+
+  .colab-reproduction {
+    padding: 6px 6px;
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 4px;
+    color: #aaa;
+    font-weight: 300;
+    border: solid 1px rgba(0, 0, 0, 0.08);
+    border-bottom-color: rgba(0, 0, 0, 0.15);
+    text-transform: uppercase;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    float: right;
+  }
+
+  .colab-reproduction:hover {
+    text-decoration: none;
+    border-bottom-color: rgba(0, 0, 0, 0.15);
+  }
+
+  .colab-reproduction-first {
+    float: left;
+    font-size: 11pt;
+  }
+
+  .colab-reproduction-logo {
+    transform: translateY(3px);
+    height: 15px;
+    width: 24px;
+  }
   </style>
 
   <d-title>
@@ -33,13 +64,13 @@
 
     <h2 style="display: none;">Introduction</h2>
 
-    <p><a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_">Follow along in a Colab notebook.</a>
-
     <p>The problem of understanding a neural network is a little bit like reverse engineering a large compiled binary of a computer program. In this analogy, the weights of the neural network are the compiled assembly instructions. At the end of the day, the weights are the fundamental thing you want to understand: how does this sequence of convolutions and matrix multiplications give rise to model behavior?</p>
 
     <p>Trying to understand artificial neural networks also has a lot in common with neuroscientists, who try to understand biological neural networks. As you may know, a major endeavor in modern neuroscience is trying to map the “connectome” of biological neural networks: which neurons connect to which. But that will only tell neuroscientists which weights are non-zero. Getting the weights &ndash; knowing whether a connection excites or inhibits, and by how much &ndash; would be a significant further step. One imagines neuroscientists would give a great deal to have the access to weights that those of us studying artificial neural networks get for free.</p>
 
     <p>And so, it’s rather surprising how little attention we actually give to looking at the weights of neural networks. There are a few exceptions to this, of course. It’s quite common for researchers to show pictures of the first layer weights in vision models (these are directly connected to RGB channels, so they’re easy to understand as images). In some work, especially historically, we see researchers reason about the weights of toy neural networks by hand. And we quite often see researchers discuss aggregate statistics of weights. But actually looking at the weights of a neural network other than the first layer is quite uncommon &ndash; to the best of our knowledge, mapping weights between hidden layers to meaningful algorithms is novel to the circuits project.</p>
+
+    <p><a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_" class="colab-reproduction colab-reproduction-first" target="_blank">Follow along in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook &rarr;</a></p>
 
     <h2>What's the difference between visualizing activations, weights, and attributions?</h2>
 
@@ -79,19 +110,21 @@
 
     <p>Interpretability methods often fail to take off because they’re hard to use. So before diving into sophisticated approaches, we wanted to offer a simple, easy to apply method.</p>
 
-    <p>In a convolutional network, the input weights for a given neuron have shape <code>[width, height, input_channels]</code>. Unless this is the first convolutional layer, this probably can’t be easily visualized because input_channels is large. (If this is the first convolutional layer, visualize it as is!) However, one can use dimensionality reduction to collapse input_channels down to 3 dimensions. We find one-sided NMF especially effective for this.</p>
+    <p>In a convolutional network, the input weights for a given neuron have shape <code>[width, height, input_channels]</code>. Unless this is the first convolutional layer, this probably can’t be easily visualized because <code>input_channels</code> is large. (If this is the first convolutional layer, visualize it as is!) However, one can use dimensionality reduction to collapse <code>input_channels</code> down to 3 dimensions. We find one-sided NMF especially effective for this.</p>
 
     <figure id="figure-1">
       <img src="images/screenshot_1.png" />
       <figcaption class="figcaption l-body">
         <p>
           <a href="#figure-1" class="figure-number">1</a>:
-          NMF of unit weights in InceptionV1 mixed4d_5x5 &ndash; <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=RHj5ZKx9Y1jX">see in colab</a>
+          NMF of unit weights in InceptionV1 mixed4d_5x5
+
+          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=RHj5ZKx9Y1jX" class="colab-reproduction" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </p>
       </figcaption>
     </figure>
 
-    <p>This visualization doesn’t tell you very much about what your weights are doing in the context of the larger model, but it does show you that they are learning nice spatial structures. This can be an easy sanity check that your neurons are learning, and a first step towards understanding your neurons behavior. We’ll also see later that this general approach of factoring weights can be extended into a powerful tool for studying neurons.</p>
+    <p>This visualization doesn’t tell you very much about what your weights are doing in the context of the larger model, but it does show you that they are learning nice spatial structures. This can be an easy sanity check that your neurons are learning, and a first step towards understanding your neuron&rsquo;s behavior. We’ll also see later that this general approach of factoring weights can be extended into a powerful tool for studying neurons.</p>
 
     <p>One thing you may quickly discover using this method is that, in models with global average pooling at the end of their convolutional layers, the last few layers will have all their weights be horizontal bands.</p>
 
@@ -126,8 +159,9 @@
       <img src="images/screenshot_3.png" />
       <figcaption class="figcaption l-body">
         <p>
-          <a href="#figure-3" class="figure-number">3</a>:
-          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=PoMQF4UtPcAJ">See example in Colab</a>.
+          <a href="#figure-3" class="figure-number">3</a>.
+
+          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=PoMQF4UtPcAJ" class="colab-reproduction" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </p>
       </figcaption>
     </figure>
@@ -144,8 +178,9 @@
       <img src="images/screenshot_4.png" />
       <figcaption class="figcaption l-body">
         <p>
-          <a href="#figure-4" class="figure-number">4</a>:
-          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=PoMQF4UtPcAJ">See example in Colab</a>.
+          <a href="#figure-4" class="figure-number">4</a>.
+
+          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=PoMQF4UtPcAJ" class="colab-reproduction" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </p>
       </figcaption>
     </figure>
@@ -174,7 +209,8 @@
       <figcaption class="figcaption l-body">
         <p>
           <a href="#figure-6" class="figure-number">6</a>.
-          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=K8URGsjLmuUj">See in Colab</a>.
+
+          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=K8URGsjLmuUj" class="colab-reproduction" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </p>
       </figcaption>
     </figure>
@@ -192,7 +228,9 @@
       <figcaption class="figcaption l-body">
         <p>
           <a href="#figure-7" class="figure-number">7</a>.
-          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=Z5Y7dAQZZAEf">See in Colab</a>.
+
+
+          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=Z5Y7dAQZZAEf" class="colab-reproduction" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </p>
       </figcaption>
     </figure>
@@ -204,7 +242,8 @@
       <figcaption class="figcaption l-body">
         <p>
           <a href="#figure-8" class="figure-number">8</a>.
-          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=Z5Y7dAQZZAEf">See in Colab</a>.
+
+          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=Z5Y7dAQZZAEf" class="colab-reproduction" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </p>
       </figcaption>
     </figure>
