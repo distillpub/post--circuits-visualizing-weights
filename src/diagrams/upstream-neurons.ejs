@@ -1,0 +1,135 @@
+<% units = require("../../static/diagrams/component_neurons.json")%>
+
+<style>
+    .upstream-neurons {
+        display: grid;
+        grid-gap: 1em;
+        margin-bottom: 1em;
+    }
+
+    h5 {
+        margin-bottom: 0px;
+    }
+
+    .upstream-neurons .row {
+        display: grid;
+        grid-template-columns: 1fr min-content 1fr min-content 1fr min-content 1fr min-content 1fr min-content 1fr min-content min-content;
+        grid-column-gap: .25em;
+        column-gap: .25em;
+        align-items: center;
+    }
+
+    .units,
+    .weights {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-gap: 0.5rem;
+        grid-column-start: 3;
+    }
+
+    img.fv {
+        display: block;
+        max-width: 100%;
+        border-radius: 8px;
+    }
+
+    img.full {
+        width: unset;
+        object-fit: none;
+        object-position: center;
+        image-rendering: optimizeQuality;
+    }
+
+    img.weight {
+        width: 100%;
+        image-rendering: pixelated;
+        align-self: center;
+        border: 1px solid #ccc;
+    }
+
+    .layer-label {
+        grid-row-start: span 2;
+    }
+
+    .layer-label label {
+        display: inline-block;
+        /* transform: rotate(-90deg); */
+    }
+
+    .annotation {
+        font-size: 1.5em;
+        font-weight: 200;
+        color: #666;
+        margin-bottom: 0.2em;
+    }
+
+    .equal-sign {
+        padding: 0 0.25em;
+    }
+
+    .ellipsis {
+        padding: 0 0.25em;
+        /* vertically align the ellipsis */
+        position: relative;
+        bottom: 0.5ex;
+    }
+
+    .unit {
+        display: block;
+        min-width: 50px;
+    }
+
+    .factor {
+        box-shadow: 0 0 8px #888;
+    }
+
+    .unit .bar {
+        display: block;
+        margin-top: 0.5em;
+        background-color: #CCC;
+        height: 4px;
+    }
+
+    .row h4 {
+        border-bottom: 1px solid #ccc;
+    }
+</style>
+
+<figure>
+    <% for (const fv_layer of ["conv2d2"]) {%>
+    <div class="upstream-neurons">
+        <% for (const [factor, hilo] of [[0, "hi"], [1, "lo"]]) {%>
+        <% localUnits = units[fv_layer][factor].reverse() %>
+        <div class="row">
+            <img class="factor fv full" src="<%= `diagrams/figure-8-upstream-nmf/${fv_layer}-${hilo}.png` %>" />
+            <span class="annotation equal-sign">=</span>
+            <% for (const unit of localUnits) {%>
+            <img class="fv fv-neuron"
+                src="<%= `diagrams/figure-8-upstream-neurons/layer_name=${fv_layer}-component=${factor}-channel_index=${unit.index}.png` %>" />
+            <span class="annotation">+</span>
+            <% } %>
+            <span class="annotation ellipsis">…</span>
+
+            <span class="figcaption"><%= factor == 0 ? "HF" : "LF" %>-factor</span>
+            <span></span>
+            <% for (const unit of localUnits) {%>
+            <div class="unit">
+                <!-- <div class="bar" style="width: <%= (unit.coeff*100).toFixed(3) %>%"></div> -->
+                <span class="magnitude figcaption"> × <%= unit.coeff.toFixed(2).toString() %></span>
+            </div>
+            <span></span>
+            <% } %>
+        </div>
+        <% } %>
+    </div>
+    <% } %>
+
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-8" class="figure-number">8</a>: Neurons (by their feature visualizations) that contribute to the two NMF factors, plus the weighted amount they contribute to
+          each factor. Here shown: NMF against <code>conv2d2</code>.
+
+          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=Z5Y7dAQZZAEf" class="colab-reproduction" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
+      </p>
+      </figcaption>
+</figure>
