@@ -25,7 +25,7 @@
   }
 
   .colab-reproduction {
-    padding: 6px 6px;
+    padding: 2px 4px;
     background: rgba(255, 255, 255, 0.75);
     border-radius: 4px;
     color: #aaa;
@@ -36,7 +36,7 @@
     display: inline-block;
     cursor: pointer;
     text-decoration: none;
-    float: right;
+    /* float: right; */
   }
 
   .colab-reproduction:hover {
@@ -46,13 +46,23 @@
 
   .colab-reproduction-first {
     float: left;
-    font-size: 11pt;
+    font-size: 9.5pt;
+  }
+
+  .colab-reproduction-inline {
+    line-height: 100%;
+    font-size: 8pt;
+  }
+
+  .colab-preface {
+    display: inline;
+    margin-right: 1em;
   }
 
   .colab-reproduction-logo {
-    transform: translateY(3px);
-    height: 15px;
-    width: 24px;
+    transform: translateY(1px);
+    height: 10px;
+    width: 16px;
   }
   </style>
 
@@ -115,14 +125,12 @@
     <figure id="figure-1">
       <img src="images/screenshot_1.png" style="max-height: 220px; width: auto;" />
       <figcaption class="figcaption l-body">
-        <p>
+        <div class="colab-preface">
           <a href="#figure-1" class="figure-number">1</a>:
           NMF of input weights in InceptionV1 <code>mixed4d_5x5</code>, for a selection of ten neurons. The red, green, and blue channels on each grid indicate the weights for each of the 3 NMF factors.
-        </p>
+        </div>
 
-        <p>
-          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=RHj5ZKx9Y1jX" class="colab-reproduction" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
-      </p>
+        <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=RHj5ZKx9Y1jX" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </figcaption>
     </figure>
 
@@ -160,11 +168,11 @@
     <figure id="figure-3">
       <img src="diagrams/Figure_3.svg" />
       <figcaption class="figcaption l-body">
-        <p>
+        <div class="colab-preface">
           <a href="#figure-3" class="figure-number">3</a>: Contextualizing weights.
+        </div>
 
-          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=PoMQF4UtPcAJ" class="colab-reproduction" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
-      </p>
+        <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=PoMQF4UtPcAJ" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </figcaption>
     </figure>
 
@@ -179,11 +187,11 @@
     <figure id="figure-4">
       <img src="diagrams/Figure_4.svg" />
       <figcaption class="figcaption l-body">
-        <p>
+        <div class="colab-preface">
           <a href="#figure-4" class="figure-number">4</a>: Small multiple weights for a single unit (<a href="https://microscope.openai.com/models/inceptionv1/mixed3b_0/342">342</a>) of <code>mixed3b</code>.
+        </div>
 
-          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=PoMQF4UtPcAJ" class="colab-reproduction" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
-      </p>
+        <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=PoMQF4UtPcAJ" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </figcaption>
     </figure>
 
@@ -209,11 +217,10 @@
     <figure id="figure-6">
       <img src="images/screenshot_6.png" />
       <figcaption class="figcaption l-body">
-        <p>
+        <div class="colab-preface">
           <a href="#figure-6" class="figure-number">6</a>.
-
-          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=K8URGsjLmuUj" class="colab-reproduction" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
-      </p>
+        </div>
+        <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=K8URGsjLmuUj" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </figcaption>
     </figure>
 
@@ -228,12 +235,10 @@
     <figure id="figure-7">
       <img src="images/screenshot_7.png" />
       <figcaption class="figcaption l-body">
-        <p>
+        <div class="colab-preface">
           <a href="#figure-7" class="figure-number">7</a>.
-
-
-          <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=Z5Y7dAQZZAEf" class="colab-reproduction" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
-      </p>
+        </div>
+        <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=Z5Y7dAQZZAEf" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </figcaption>
     </figure>
 
