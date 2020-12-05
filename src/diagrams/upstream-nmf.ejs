@@ -1,0 +1,116 @@
+<% units = require("../../static/diagrams/units.json").units%>
+
+<style>
+    .upstream-nmf {
+        display: grid;
+        grid-row-gap: .5rem;
+        margin-bottom: 2rem;
+    }
+
+    .upstream-nmf .row {
+        display: grid;
+        grid-template-columns: min-content 1fr 6fr;
+        grid-column-gap: 1rem;
+        grid-row-gap: .5rem;
+
+    }
+
+    .units,
+    .weights {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-gap: 0.5rem;
+        grid-column-start: 3;
+    }
+
+    img.fv {
+        max-width: 100%;
+        border-radius: 8px;
+    }
+
+    div.units img.full {
+        margin-left: 1px;
+        margin-bottom: 0px;
+    }
+
+    img.full {
+        width: unset;
+        object-fit: none;
+        object-position: center;
+        image-rendering: optimizeQuality;
+    }
+
+    img.weight {
+        width: 100%;
+        image-rendering: pixelated;
+        align-self: center;
+        border: 1px solid #ccc;
+    }
+
+    .annotated-image {
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+    }
+
+    .annotated-image span {
+        writing-mode: vertical-lr;
+    }
+
+    .layer-label {
+        grid-row-start: span 2;
+        text-align: end;
+    }
+
+    .layer-label label {
+        display: inline-block;
+        writing-mode: vertical-lr;
+    }
+
+    .layer-label.hidden {
+        border-color: transparent;
+    }
+
+    .layer-label.nonhidden {
+      margin-left: 1rem;
+    }
+
+    .layer-label.hidden label {
+        visibility: hidden;
+    }
+</style>
+
+<d-figure id="figure-9">
+    <figure>
+        <div class="upstream-nmf">
+
+            <div class="row">
+                <div class="layer-label hidden"><label class="figcaption">mixed3a</label></div>
+                <div class="units">
+                    <% for (const unit of units) {%>
+                    <img class="fv full" src="<%= `diagrams/figure-7-feature-vis/neuron-${unit.index}.png` %>"
+                        title="<%= "Unit " + unit.index %>" />
+                    <% } %>
+                </div>
+            </div>
+
+            <% for (const [factor_layer, fv_layer] of [["maxpool1", "conv2d2"]]) {%>
+            <div class="row">
+                <div class="layer-label nonhidden"><label class="figcaption"></label></div>
+                <% for (const [factor, hilo] of [[1, "hi"], [0, "lo"]]) {%>
+                <div class="annotated-image">
+                    <span class="figcaption"><%= hilo == "hi" ? "HF-factor" : "LF-factor" %></span>
+                    <img class="fv full factor" src="<%= `diagrams/figure-8-upstream-nmf/${fv_layer}-${hilo}.png` %>" />
+                </div>
+                <div class="weights">
+                    <% for (const unit of units) {%>
+                    <img class="weight"
+                        src="<%= `diagrams/figure-8-upstream-nmf/neuron=${unit.index}-layer=${factor_layer}-factor=${factor}.png` %>" />
+                    <% } %>
+                </div>
+                <% } %>
+            </div>
+            <% } %>
+        </div>
+    </figure>
+</d-figure>

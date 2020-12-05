@@ -233,10 +233,14 @@
     <p>This can be especially helpful when you have a group of neurons like high-low frequency detectors or black and white vs color detectors that look are all mostly looking for a small number of factors. For example, a large number of high-low frequency detectors can be significantly understood as combining just two factors &ndash; a high frequency factor and a low-frequency factor &ndash; in different patterns.</p>
 
     <figure id="figure-7">
-      <img src="images/screenshot_7.png" />
+      <%= require('./diagrams/upstream-nmf.ejs')() %>
       <figcaption class="figcaption l-body">
         <div class="colab-preface">
-          <a href="#figure-7" class="figure-number">7</a>.
+          <a href="#figure-7" class="figure-number">7</a>:
+
+          NMF factorization on the weights (<span class="legend-label support">excitatory</span> and <span
+                  class="legend-label inhibit">inhibitory</span>) connecting six high-low frequency detectors in InceptionV1 to the
+          the layer <code>conv2d2</code>.</p>
         </div>
         <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=Z5Y7dAQZZAEf" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </figcaption>
