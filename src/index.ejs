@@ -215,10 +215,10 @@
     <p>Recall that the weights for a single neuron have shape <code>[width, height, input_channels]</code>. In the previous section we split up <code>input_channels</code> and visualized each <code>[width, height]</code> matrix. But an alternative approach is to think of there as being a vector over input neurons at each spatial position, and to apply feature visualization to each of those vectors. You can think of this as telling us what the weights in that position are collectively looking for.</p>
 
     <figure id="figure-6">
-      <img src="images/screenshot_6.png" />
+      <img src="images/screenshot_6.png" style="height: 62%; width: 62%;"/>
       <figcaption class="figcaption l-body">
         <div class="colab-preface">
-          <a href="#figure-6" class="figure-number">6</a>.
+          <a href="#figure-6" class="figure-number">6</a>. Left: Feature visualization of a car neuron. Right: Feature visualizations of the vector over input neurons at each spatial position of the car neuron's weights. As we see, the car neuron broadly responds to window features above wheel features.
         </div>
         <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=K8URGsjLmuUj" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </figcaption>
