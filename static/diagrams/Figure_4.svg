@@ -1,35 +1,35 @@
-<svg width="1424" height="436" viewBox="0 0 1424 436" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<rect width="1424" height="436" fill="white"/>
-<path d="M0 175C0 169.477 4.47715 165 10 165H101V266H10C4.47715 266 0 261.523 0 256V175Z" fill="url(#pattern0)"/>
-<path d="M0 35C0 29.4772 4.47715 25 10 25H101V125H10C4.47715 125 0 120.523 0 115V35Z" fill="url(#pattern1)"/>
-<path d="M0 315C0 309.477 4.47715 305 10 305H101V405H10C4.47715 405 0 400.523 0 395V315Z" fill="url(#pattern2)"/>
-<path d="M101.5 165.5H192C197.247 165.5 201.5 169.753 201.5 175V256C201.5 261.247 197.247 265.5 192 265.5H101.5V165.5Z" fill="url(#pattern3)" stroke="#717171"/>
-<path d="M101.5 25.5H192C197.247 25.5 201.5 29.7533 201.5 35V115C201.5 120.247 197.247 124.5 192 124.5H101.5V25.5Z" fill="url(#pattern4)" stroke="#717171"/>
-<path d="M101.5 305.5H192C197.247 305.5 201.5 309.753 201.5 315V395C201.5 400.247 197.247 404.5 192 404.5H101.5V305.5Z" fill="url(#pattern5)" stroke="#717171"/>
-<path d="M376.703 214.988L348 214.988" stroke="#888888" stroke-width="4"/>
-<path d="M394.491 214.989L376.299 225.718L376.299 204.26L394.491 214.989Z" fill="#888888"/>
-<path d="M397 175C397 169.477 401.477 165 407 165H488C493.523 165 498 169.477 498 175V256C498 261.523 493.523 266 488 266H407C401.477 266 397 261.523 397 256V175Z" fill="url(#pattern6)"/>
-<path d="M201.5 355.5C345.5 354 204.5 215 348.5 215" stroke="#888888" stroke-width="4"/>
-<path d="M201 76C345 77.484 204 215 348 215" stroke="#888888" stroke-width="4"/>
-<line x1="202" y1="215" x2="348" y2="215" stroke="#888888" stroke-width="4"/>
+<svg width="1424" height="563" viewBox="0 0 1424 563" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect width="1424" height="563" fill="white"/>
+<path d="M0 219.421C0 213.898 4.47715 209.421 10 209.421H139.539V348.96H10C4.47715 348.96 0 344.483 0 338.96V219.421Z" fill="url(#pattern0)"/>
+<path d="M0 26C0 20.4772 4.47715 16 10 16H139.539V154.158H10C4.47715 154.158 0 149.681 0 144.158V26Z" fill="url(#pattern1)"/>
+<path d="M0 412.842C0 407.319 4.47715 402.842 10 402.842H139.539V541H10C4.47715 541 0 536.523 0 531V412.842Z" fill="url(#pattern2)"/>
+<path d="M140.04 209.921H269.079C274.326 209.921 278.579 214.174 278.579 219.421V338.96C278.579 344.207 274.326 348.46 269.079 348.46H140.04V209.921Z" fill="url(#pattern3)" stroke="#717171"/>
+<path d="M140.04 16.5H269.079C274.326 16.5 278.579 20.7533 278.579 26V144.158C278.579 149.405 274.326 153.658 269.079 153.658H140.04V16.5Z" fill="url(#pattern4)" stroke="#717171"/>
+<path d="M140.04 403.342H269.079C274.326 403.342 278.579 407.595 278.579 412.842V531C278.579 536.247 274.326 540.5 269.079 540.5H140.04V403.342Z" fill="url(#pattern5)" stroke="#717171"/>
+<path d="M520.445 278.483L480.789 278.483" stroke="#888888" stroke-width="4"/>
+<path d="M545.021 278.485L519.887 293.308L519.887 263.662L545.021 278.485Z" fill="#888888"/>
+<path d="M548.487 219.421C548.487 213.898 552.964 209.421 558.487 209.421H678.026C683.549 209.421 688.026 213.898 688.026 219.421V338.96C688.026 344.483 683.549 348.96 678.026 348.96H558.487C552.964 348.96 548.487 344.483 548.487 338.96V219.421Z" fill="url(#pattern6)"/>
+<path d="M278.388 472.611C477.336 470.539 282.533 278.5 481.481 278.5" stroke="#888888" stroke-width="4"/>
+<path d="M277.698 86.46C476.645 88.5103 281.842 278.5 480.79 278.5" stroke="#888888" stroke-width="4"/>
+<line x1="279.079" y1="279.263" x2="480.79" y2="279.263" stroke="#888888" stroke-width="4"/>
 <defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0" transform="scale(0.0166667)"/>
 </pattern>
 <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image1" transform="translate(0 -0.005) scale(0.0166667 0.0168333)"/>
+<use xlink:href="#image1" transform="translate(0 -0.0050001) scale(0.0166667 0.0168333)"/>
 </pattern>
 <pattern id="pattern2" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image2" transform="translate(0 -0.005) scale(0.0166667 0.0168333)"/>
+<use xlink:href="#image2" transform="translate(0 -0.0050001) scale(0.0166667 0.0168333)"/>
 </pattern>
 <pattern id="pattern3" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image3" transform="scale(0.2)"/>
 </pattern>
 <pattern id="pattern4" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image4" transform="translate(0 -0.005) scale(0.2 0.202)"/>
+<use xlink:href="#image4" transform="translate(0 -0.0050001) scale(0.2 0.202)"/>
 </pattern>
 <pattern id="pattern5" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image5" transform="translate(0 -0.005) scale(0.2 0.202)"/>
+<use xlink:href="#image5" transform="translate(0 -0.0050001) scale(0.2 0.202)"/>
 </pattern>
 <pattern id="pattern6" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image6" transform="scale(0.0166667)"/>
