@@ -283,13 +283,13 @@
 
     <h3>Benefits of Expanded Weights</h3>
 
-    <p>Multiplying out the weights like this can sometimes help us see a simpler underlying structure. For example, <a href="https://microscope.openai.com/models/inceptionv1/mixed3b_0/208">3b:208</a> is a black and white center detector. It’s built by combining a bunch of black and white vs color detectors together.</p>
+    <p>Multiplying out the weights like this can sometimes help us see a simpler underlying structure. For example, <a href="https://microscope.openai.com/models/inceptionv1/mixed3b_0/208"><code>mixed3b</code> 208</a> is a black and white center detector. It’s built by combining a bunch of black and white vs color detectors together.</p>
 
     <figure id="figure-9">
       <img src="diagrams/Figure_9.svg" />
       <figcaption class="figcaption l-body">
         <p>
-          <a href="#figure-9" class="figure-number">9</a>. 3b:208 along with five neurons from <code>mixed3a</code> that contribute the <a href="https://storage.googleapis.com/distill-circuits/inceptionv1-weight-explorer/mixed3b_208.html">strongest weights</a> to it.
+          <a href="#figure-9" class="figure-number">9</a>. <code>mixed3b</code> 208 along with five neurons from <code>mixed3a</code> that contribute the <a href="https://storage.googleapis.com/distill-circuits/inceptionv1-weight-explorer/mixed3b_208.html">strongest weights</a> to it.
         </p>
       </figcaption>
     </figure>
@@ -301,7 +301,7 @@
       <img src="images/long_weights_2.png" style="height: 157px;"/>
       <figcaption class="figcaption l-body">
         <p>
-          <a href="#figure-10" class="figure-number">10</a>. Top 18 <a href="https://storage.googleapis.com/distill-circuits/inceptionv1-weight-explorer/mixed3b_208.html">expanded weights</a> from <code>conv2d2</code> to 3b:208.
+          <a href="#figure-10" class="figure-number">10</a>. Top eighteen <a href="https://storage.googleapis.com/distill-circuits/inceptionv1-weight-explorer/mixed3b_208.html">expanded weights</a> from <code>conv2d2</code> to <code>mixed3b</code> 208.
         </p>
       </figcaption>
     </figure>
@@ -316,7 +316,7 @@
       <img src="diagrams/Figure_11.svg" />
       <figcaption class="figcaption l-body">
         <p>
-          <a href="#figure-11" class="figure-number">11</a>. Boundary detectors such as <a href="https://storage.googleapis.com/distill-circuits/inceptionv1-weight-explorer/mixed3b_345.html">3b:345</a> detect both low-to-high and high-to-low frequency transitions.
+          <a href="#figure-11" class="figure-number">11</a>. Boundary detectors such as <a href="https://storage.googleapis.com/distill-circuits/inceptionv1-weight-explorer/mixed3b_345.html"><code>mixed3b</code> 345</a> detect both low-to-high and high-to-low frequency transitions.
         </p>
       </figcaption>
     </figure>
