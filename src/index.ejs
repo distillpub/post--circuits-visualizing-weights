@@ -323,17 +323,28 @@
 
     <p>Since high-low frequency detectors are usually excited by high-frequency patterns on one side and inhibited on the other (and vice versa for low frequency), detecting both directions means that the expanded weights cancel out! As a result, expanded weights appear to show that boundary detectors are neither excited or inhibited by high frequency detectors two layers back, when in fact they are <i>both</i> excited and also inhibited by high frequency, depending on the context, and it’s just that those two different cases cancel out.</p>
 
+    <figure id="figure-12">
+      <img src="diagrams/Figure_11B.svg" />
+      <figcaption class="figcaption l-body">
+        <p>
+          <a href="#figure-12" class="figure-number">12</a>.
+
+          Neurons two layers back (such as <a href="https://storage.googleapis.com/distill-circuits/inceptionv1-weight-explorer/conv2d2_89.html"><code>conv2d2</code> 89</a>) may have a strong influence on the high-low frequency detectors that contribute to <code>mixed3b</code> 345 (top), but that influence washes out when we look at the expanded weights (bottom) directly between <code>conv2d2</code> 89 and <code>mixed3b</code> 345. This is a consequence of the <a href="https://drafts.distill.pub/distillpub/post--cricuits-equivariance/">"equivariant→invariant"</a> circuit.
+        </p>
+      </figcaption>
+    </figure>
+
     <p>More sophisticated techniques for describing multi-layer interactions can help us understand cases like this. For example, one can determine what the “best case” excitation interaction between two neurons is (that is, the maximum achievable gradient between them). Or you can look at the gradient for a particular example. Or you can factor the gradient over many examples to determine major possible cases. These are all useful techniques, but we’ll leave them for a future article to discuss.</p>
 
     <h3>Qualitative properties</h3>
 
     <p>One qualitative property of expanding weights across many layers deserves mention before we end our discussion of them. Expanded weights often get this kind of “electron orbital”-like smooth spatial structures:</p>
 
-    <figure id="figure-12">
+    <figure id="figure-13">
       <img src="images/screenshot_12.png" />
       <figcaption class="figcaption l-body">
         <p>
-          <a href="#figure-12" class="figure-number">12</a>.
+          <a href="#figure-13" class="figure-number">13</a>.
         </p>
       </figcaption>
     </figure>
