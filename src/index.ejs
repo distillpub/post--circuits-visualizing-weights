@@ -306,7 +306,7 @@
       </figcaption>
     </figure>
 
-    <p>A particularly important use of this method &ndash; which we’ve been implicitly using in earlier examples &ndash; is to jump over “bottleneck layers.” Bottleneck layers are layers of the network which squeeze the number of channels down to a much smaller number, typically in a branch, making large spatial convolutions cheaper. Since so much information is compressed, these layers are often polysemantic, and it can often be more helpful to jump over them and understand the connection to the wider layer before them.</p>
+    <p>A particularly important use of this method &ndash; which we’ve been implicitly using in earlier examples &ndash; is to jump over “bottleneck layers.” Bottleneck layers are layers of the network which squeeze the number of channels down to a much smaller number, typically in a branch, making large spatial convolutions cheaper. The <a href="https://microscope.openai.com/models/inceptionv1/mixed3a_5x5_bottleneck_0?models.op.feature_vis.type=channel&models.op.technique=feature_vis">bottleneck layers</a> of InceptionV1 are one example. Since so much information is compressed, these layers are often polysemantic, and it can often be more helpful to jump over them and understand the connection to the wider layer before them.</p>
 
     <h3>Cases where expanded weights are misleading</h3>
 
