@@ -16,16 +16,26 @@
 			"affiliationURL": "https://openai.com"
 		},
 		{
+			"author": "Gabriel Goh",
+			"authorURL": "https://gabgoh.github.io",
+			"affiliation": "OpenAI",
+			"affiliationURL": "https://openai.com"
+		},
+		{
 			"author": "Chelsea Voss",
 			"authorURL": "https://csvoss.com",
 			"affiliation": "OpenAI",
 			"affiliationURL": "https://openai.com"
 		},
 		{
-			"author": "Gabriel Goh",
-			"authorURL": "https://gabgoh.github.io",
+			"author": "Michael Petrov",
+			"authorURL": "https://twitter.com/mpetrov",
 			"affiliation": "OpenAI",
 			"affiliationURL": "https://openai.com"
+		},
+		{
+			"author": "Ludwig Schubert",
+			"authorURL": "https://schubert.io"
 		}
 	],
 	"katex": {
