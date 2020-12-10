@@ -1,35 +1,35 @@
-<svg width="1424" height="563" viewBox="0 0 1424 563" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<rect width="1424" height="563" fill="white"/>
-<path d="M0 219.421C0 213.898 4.47715 209.421 10 209.421H139.539V348.96H10C4.47715 348.96 0 344.483 0 338.96V219.421Z" fill="url(#pattern0)"/>
-<path d="M0 26C0 20.4772 4.47715 16 10 16H139.539V154.158H10C4.47715 154.158 0 149.681 0 144.158V26Z" fill="url(#pattern1)"/>
-<path d="M0 412.842C0 407.319 4.47715 402.842 10 402.842H139.539V541H10C4.47715 541 0 536.523 0 531V412.842Z" fill="url(#pattern2)"/>
-<path d="M140.04 209.921H269.079C274.326 209.921 278.579 214.174 278.579 219.421V338.96C278.579 344.207 274.326 348.46 269.079 348.46H140.04V209.921Z" fill="url(#pattern3)" stroke="#717171"/>
-<path d="M140.04 16.5H269.079C274.326 16.5 278.579 20.7533 278.579 26V144.158C278.579 149.405 274.326 153.658 269.079 153.658H140.04V16.5Z" fill="url(#pattern4)" stroke="#717171"/>
-<path d="M140.04 403.342H269.079C274.326 403.342 278.579 407.595 278.579 412.842V531C278.579 536.247 274.326 540.5 269.079 540.5H140.04V403.342Z" fill="url(#pattern5)" stroke="#717171"/>
-<path d="M520.445 278.483L480.789 278.483" stroke="#888888" stroke-width="4"/>
-<path d="M545.021 278.485L519.887 293.308L519.887 263.662L545.021 278.485Z" fill="#888888"/>
-<path d="M548.487 219.421C548.487 213.898 552.964 209.421 558.487 209.421H678.026C683.549 209.421 688.026 213.898 688.026 219.421V338.96C688.026 344.483 683.549 348.96 678.026 348.96H558.487C552.964 348.96 548.487 344.483 548.487 338.96V219.421Z" fill="url(#pattern6)"/>
-<path d="M278.388 472.611C477.336 470.539 282.533 278.5 481.481 278.5" stroke="#888888" stroke-width="4"/>
-<path d="M277.698 86.46C476.645 88.5103 281.842 278.5 480.79 278.5" stroke="#888888" stroke-width="4"/>
-<line x1="279.079" y1="279.263" x2="480.79" y2="279.263" stroke="#888888" stroke-width="4"/>
+<svg width="1424" height="667" viewBox="0 0 1424 667" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect width="1424" height="667" fill="white"/>
+<path d="M0 250.899C0 245.377 4.47715 240.899 10 240.899H162.249V403.148H10C4.47715 403.148 0 398.671 0 393.148V250.899Z" fill="url(#pattern0)"/>
+<path d="M0 26C0 20.4772 4.47715 16 10 16H162.249V176.643H10C4.47715 176.643 0 172.165 0 166.643V26Z" fill="url(#pattern1)"/>
+<path d="M0 475.799C0 470.276 4.47715 465.799 10 465.799H162.249V626.442H10C4.47715 626.442 0 621.965 0 616.442V475.799Z" fill="url(#pattern2)"/>
+<path d="M162.749 241.399H314.498C319.745 241.399 323.998 245.653 323.998 250.899V393.148C323.998 398.395 319.745 402.648 314.498 402.648H162.749V241.399Z" fill="url(#pattern3)" stroke="#717171"/>
+<path d="M162.749 16.5H314.498C319.745 16.5 323.998 20.7533 323.998 26V166.643C323.998 171.889 319.745 176.143 314.498 176.143H162.749V16.5Z" fill="url(#pattern4)" stroke="#717171"/>
+<path d="M162.749 466.299H314.498C319.745 466.299 323.998 470.553 323.998 475.799V616.442C323.998 621.689 319.745 625.942 314.498 625.942H162.749V466.299Z" fill="url(#pattern5)" stroke="#717171"/>
+<path d="M605.146 321.201L559.036 321.201" stroke="#888888" stroke-width="4"/>
+<path d="M633.721 321.203L604.496 338.439L604.496 303.968L633.721 321.203Z" fill="#888888"/>
+<path d="M637.751 250.899C637.751 245.377 642.228 240.899 647.751 240.899H790C795.523 240.899 800 245.377 800 250.899V393.148C800 398.671 795.523 403.148 790 403.148H647.751C642.228 403.148 637.751 398.671 637.751 393.148V250.899Z" fill="url(#pattern6)"/>
+<path d="M323.695 546.923C555.02 544.513 328.514 321.22 559.84 321.22" stroke="#888888" stroke-width="4"/>
+<path d="M322.892 97.927C554.217 100.311 327.711 321.22 559.036 321.22" stroke="#888888" stroke-width="4"/>
+<line x1="324.498" y1="321.2" x2="559.036" y2="321.2" stroke="#888888" stroke-width="4"/>
 <defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0" transform="scale(0.0166667)"/>
 </pattern>
 <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image1" transform="translate(0 -0.0050001) scale(0.0166667 0.0168333)"/>
+<use xlink:href="#image1" transform="translate(0 -0.00500011) scale(0.0166667 0.0168333)"/>
 </pattern>
 <pattern id="pattern2" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image2" transform="translate(0 -0.0050001) scale(0.0166667 0.0168333)"/>
+<use xlink:href="#image2" transform="translate(0 -0.00500011) scale(0.0166667 0.0168333)"/>
 </pattern>
 <pattern id="pattern3" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image3" transform="scale(0.2)"/>
 </pattern>
 <pattern id="pattern4" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image4" transform="translate(0 -0.0050001) scale(0.2 0.202)"/>
+<use xlink:href="#image4" transform="translate(0 -0.00500011) scale(0.2 0.202)"/>
 </pattern>
 <pattern id="pattern5" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image5" transform="translate(0 -0.0050001) scale(0.2 0.202)"/>
+<use xlink:href="#image5" transform="translate(0 -0.00500011) scale(0.2 0.202)"/>
 </pattern>
 <pattern id="pattern6" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image6" transform="scale(0.0166667)"/>
