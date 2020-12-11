@@ -94,7 +94,7 @@
         <b>Weights:</b> We generally think of these as being “how” the neural network computes one layer from the previous one. In the reverse engineering analogy, these are compiled assembly instructions.
       </li>
       <li>
-        <b>Attributions:</b> Attributions try to tell us the extent to which one neuron influenced a later neuron. We often think of this as “why” the neuron fired. We need to be careful with attributions, because they’re a human-defined object on top of a neural network rather than a fundamental object. They aren’t always well defined, and people mean different things by them. (They are very well defined if you are only operating across adjacent layers!)
+        <b>Attributions:</b> Attributions try to tell us the extent to which one neuron influenced a later neuron.<d-cite bibtex-key="yosinski2015understanding,zeiler2014visualizing"></d-cite>We often think of this as “why” the neuron fired. We need to be careful with attributions, because they’re a human-defined object on top of a neural network rather than a fundamental object. They aren’t always well defined, and people mean different things by them. (They are very well defined if you are only operating across adjacent layers!)
       </li>
     </ul>
 
@@ -114,7 +114,7 @@
       </li>
     </ul>
 
-    <p>Many of the methods we’ll use to address these problems were previously explored in <a href="https://distill.pub/2018/building-blocks/">Building Blocks</a> in the context of understanding activation vectors. The goal of this article is to show how similar ideas can be applied to weights instead of activations. Of course, we’ve already implicitly used these methods in various circuit articles, but in those articles the methods have been of secondary interest to the results. It seems useful to give some dedicated discussion to the methods.</p>
+    <p>Many of the methods we’ll use to address these problems were previously explored in <a href="https://distill.pub/2018/building-blocks/">Building Blocks</a> in the context of understanding activation vectors<d-cite bibtex-key="olah2018the"></d-cite>. The goal of this article is to show how similar ideas can be applied to weights instead of activations. Of course, we’ve already implicitly used these methods in various circuit articles<d-cite bibtex-key="olah2020zoom,olah2020an,cammarata2020curve"></d-cite>, but in those articles the methods have been of secondary interest to the results. It seems useful to give some dedicated discussion to the methods.</p>
 
     <h2>Aside: One Simple Trick</h2>
 
@@ -136,7 +136,7 @@
 
     <p>This visualization doesn’t tell you very much about what your weights are doing in the context of the larger model, but it does show you that they are learning nice spatial structures. This can be an easy sanity check that your neurons are learning, and a first step towards understanding your neuron&rsquo;s behavior. We’ll also see later that this general approach of factoring weights can be extended into a powerful tool for studying neurons.</p>
 
-    <p>One thing you may quickly discover using this method is that, in models with global average pooling at the end of their convolutional layers, the last few layers will have all their weights be horizontal bands.</p>
+    <p>Despite this lack of contextualization, one-sided NMF can be a great technique for investigating multiple channels at a glance. One thing you may quickly discover using this method is that, in models with global average pooling at the end of their convolutional layers, the last few layers will have all their weights be horizontal bands.</p>
 
     <figure id="figure-2">
       <img src="images/screenshot_2.png" style="max-height: 220px; width: auto;" />
@@ -148,22 +148,22 @@
       </figcaption>
     </figure>
 
-    <p>We call this phenomenon <i>weight banding</i>, and a detailed article by Petrov et al. is forthcoming (draft available on request).</p>
+    <p>We call this phenomenon <i>weight banding</i>, and a detailed article by Petrov et al. is forthcoming (draft available on request). One-sided NMF allows for quickly testing and validating hypotheses about phenomena such as weight banding.</p>
 
     <h2>Contextualizing Weights with Feature Visualization</h2>
 
-    <p>Of course, looking at weights in a vacuum isn’t very interesting. In order to really understand what’s going on, we need to <i>contextualize</i> weights in the broader context of the network. The challenge of contextualization is a recurring challenge in understanding neural networks: we can easily observe every activation, every weight, and every gradient; the challenge lies in determining what those values represent.</p>
+    <p>Of course, looking at weights in a vacuum isn’t very interesting. In order to really understand what’s going on, we need to <i>contextualize</i> weights in the broader context of the network<d-cite bibtex-key="olah2018the"></d-cite>. The challenge of contextualization is a recurring challenge in understanding neural networks: we can easily observe every activation, every weight, and every gradient; the challenge lies in determining what those values represent.</p>
 
     <p>Recall that the weights between two convolutional layers are a four dimensional array of the shape:</p>
 
     <p><code>[relative x position, relative y position,
     input channels, output channels]</code></p>
 
-    <p>If we fix the input channel and the output channel, we get a 2d array we can present with traditional data visualization. Let’s assume we know which neuron we’re interested in understanding, so we have the output channel. We can pick the input channels with high magnitude weights to our output channel.</p>
+    <p>If we fix the input channel and the output channel, we get a 2D array we can present with traditional data visualization. Let’s assume we know which neuron we’re interested in understanding, so we have the output channel. We can pick the input channels with high magnitude weights to our output channel.</p>
 
     <p>But what does the input represent? What about the output?</p>
 
-    <p>The key trick is that techniques like feature visualization (or deeper investigations of neurons) can help us understand what the input and output neurons represent, contextualizing the graph. Feature visualizations are especially attractive because they’re automatic, and produce a single image which is often very informative about the neuron. As a result, we often represent neurons as feature visualizations in weight diagrams.</p>
+    <p>The key trick is that techniques like feature visualization<d-cite bibtex-key="olah2017feature,nguyen2016multifaceted,karpathy2015visualizing,erhan2009visualizing"></d-cite> (or deeper investigations of neurons) can help us understand what the input and output neurons represent, contextualizing the graph. Feature visualizations are especially attractive because they’re automatic, and produce a single image which is often very informative about the neuron. As a result, we often represent neurons as feature visualizations in weight diagrams.</p>
 
     <figure id="figure-3">
       <img src="diagrams/Figure_3.svg" />
@@ -176,9 +176,9 @@
       </figcaption>
     </figure>
 
-    <p>This approach is the weight analogue of using feature visualizations to contextualize activation vectors in <a href="https://distill.pub/2018/building-blocks/">Building Blocks</a> (see the section titled “Making Sense of Hidden Layers”).</p>
+    <p>This approach is the weight analogue of using feature visualizations to contextualize activation vectors in <a href="https://distill.pub/2018/building-blocks/">Building Blocks</a> (see the section titled “Making Sense of Hidden Layers”).<d-cite bibtex-key="olah2018the"></d-cite></p>
 
-    <p>While we aren’t experts, it seems like this might be similar to reverse engineering a normal compiled computer program. Since you can’t hold everything in your head at once, you need to start assigning variable names to the values stored in registers to keep track of them. Feature visualizations are essentially automatic variable names for neurons, which are roughly analogous to registers or variables.</p>
+    <p>While we aren’t experts, it seems like this might be similar to reverse engineering a normal compiled computer program. Since you can’t hold everything in your head at once, you need to start assigning variable names to the values stored in registers to keep track of them. Feature visualizations are essentially automatic variable names for neurons, which are roughly analogous to those registers or variables.</p>
 
     <h3>Small Multiples</h3>
 
@@ -201,7 +201,7 @@
       <img src="diagrams/Figure_5.svg" />
       <figcaption class="figcaption l-body">
         <p>
-          <a href="#figure-5" class="figure-number">5</a>: Small multiple weights for a variety of <a href="https://distill.pub/2020/circuits/curve-detectors/">curve detectors</a>.
+          <a href="#figure-5" class="figure-number">5</a>: Small multiple weights for a variety of <a href="https://distill.pub/2020/circuits/curve-detectors/">curve detectors</a>.<d-cite bibtex-key="cammarata2020curve"></d-cite>
       </p>
       </figcaption>
     </figure>
