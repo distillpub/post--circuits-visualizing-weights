@@ -1,7 +1,7 @@
 {
 	"title": "High/Low frequency detectors",
 	"description": "A family of early-vision filters reacting to contrasts between spatial gratings of different frequency",
-	"password": "hilo",
+	"password": "weights",
 	"authors": [
 		{
 			"author": "Chris Olah",
