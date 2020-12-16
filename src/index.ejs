@@ -218,7 +218,7 @@
       <img src="images/screenshot_6.png" style="height: 190px; width: auto;"/>
       <figcaption class="figcaption l-body">
         <div class="colab-preface">
-          <a href="#figure-6" class="figure-number">6</a>. Left: Feature visualization of a car neuron. Right: Feature visualizations of the vector over input neurons at each spatial position of the car neuron's weights. As we see, the car neuron broadly responds to window features above wheel features.
+          <a href="#figure-6" class="figure-number">6</a>. <b>Left:</b> Feature visualization of a car neuron. <b>Right:</b> Feature visualizations of the vector over input neurons at each spatial position of the car neuron's weights. As we see, the car neuron broadly responds to window features above wheel features.
         </div>
         <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=K8URGsjLmuUj" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
       </figcaption>
@@ -358,7 +358,7 @@
 
     <p>For the purposes of this article, we’ll put the question of which neurons we want to study outside of our scope, and only discuss the problem of picking which connections to study. (We may be trying to comprehensively study a model, in which case we want to study all neurons. But we might also, for example, be trying to study neurons we’ve determined related to some narrower aspect of model behavior.)</p>
 
-    <p>Generally, we chose to look at the largest weights, as we did at the beginning of the section on contextualization. Unfortunately, there tends to be a long tail of small weights, and at some point it generally gets impractical to look at these. How much of the story is really hiding in these small weights? We don’t know, but polysemantic neurons suggest there could be a very important and subtle story hiding here! There’s some hope that sparse neural networks might make this much better, by getting rid of small weights, but that’s presently speculative.</p>
+    <p>Generally, we chose to look at the largest weights, as we did at the beginning of the section on contextualization. Unfortunately, there tends to be a long tail of small weights, and at some point it generally gets impractical to look at these. How much of the story is really hiding in these small weights? We don’t know, but polysemantic neurons suggest there could be a very important and subtle story hiding here! There’s some hope that sparse neural networks might make this much better, by getting rid of small weights, but whether such conclusions can be drawn about non-sparse networks is presently speculative.</p>
 
     <p>An alternative strategy that we’ve brushed on a few times is to reduce your weights into a few components and then study those factors (for example, with NMF). Often, a very small number of components can explain much of the variance. In fact, sometimes a small number of factors can explain the weights of an entire set of neurons! Prominent examples  of this are high-low frequency detectors (as we saw earlier) and black and white vs color detectors.</p>
 
@@ -388,7 +388,7 @@
     <h3>Acknowledgments</h3>
 
     <p>
-      We are grateful to Stefan Sietzen and [[potentially your name here, dear draft-reader!]] for remarks on a draft, as well as participants of #circuits in the Distill slack for their comments and engagement with these concepts, including Humza Iqbal, Kenneth Co, and Vincent Tjeng.
+      We are grateful to participants of #circuits in the Distill slack for their pre-draft comments and engagement with these concepts, including Kenneth Co, Humza Iqbal, and Vincent Tjeng. We are also grateful to Daniel Filan, Humza Iqbal, Stefan Sietzen, and Vincent Tjeng for remarks on a draft.
     </p>
 
     <d-footnote-list></d-footnote-list>
