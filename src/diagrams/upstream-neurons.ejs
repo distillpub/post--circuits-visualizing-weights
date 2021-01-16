@@ -104,8 +104,10 @@
             <img class="factor fv full" src="<%= `diagrams/figure-8-upstream-nmf/${fv_layer}-${hilo}.png` %>" />
             <span class="annotation equal-sign">=</span>
             <% for (const unit of localUnits) {%>
-            <img class="fv fv-neuron"
-                src="<%= `diagrams/figure-8-upstream-neurons/layer_name=${fv_layer}-component=${factor}-channel_index=${unit.index}.png` %>" />
+            <a href="https://storage.googleapis.com/distill-circuits/inceptionv1-weight-explorer/${fv_layer}_${unit.index}.html" style="text-decoration: none; border-bottom: none;">
+              <img class="fv fv-neuron"
+                  src="<%= `diagrams/figure-8-upstream-neurons/layer_name=${fv_layer}-component=${factor}-channel_index=${unit.index}.png` %>" />
+            </a>
             <span class="annotation">+</span>
             <% } %>
             <span class="annotation ellipsis">…</span>

@@ -88,8 +88,10 @@
                 <div class="layer-label hidden"><label class="figcaption">mixed3a</label></div>
                 <div class="units">
                     <% for (const unit of units) {%>
-                    <img class="fv full" src="<%= `diagrams/figure-7-feature-vis/neuron-${unit.index}.png` %>"
-                        title="<%= "Unit " + unit.index %>" />
+                    <a href="https://storage.googleapis.com/distill-circuits/inceptionv1-weight-explorer/mixed3a_${unit.index}.html" style="text-decoration: none; border-bottom: none;">
+                      <img class="fv full" src="<%= `diagrams/figure-7-feature-vis/neuron-${unit.index}.png` %>"
+                          title="<%= "Unit " + unit.index %>" />
+                    </a>
                     <% } %>
                 </div>
             </div>
