@@ -36,7 +36,19 @@
 		{
 			"author": "Ludwig Schubert",
 			"authorURL": "https://schubert.io"
+		},
+		{
+			"author": "Ben Egan",
+			"affiliation": "Mount Royal University",
+			"affiliationURL": "https://mtroyal.ca"
+		},
+		{
+			"author": "Swee Kiat Lim",
+			"authorURL": "https://greentfrapp.github.io/",
+			"affiliation": "Stanford University",
+			"affiliationURL": "https://stanford.edu"
 		}
+
 	],
 	"katex": {
 		"delimiters": [
