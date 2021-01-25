@@ -55,16 +55,6 @@
     border-bottom-color: rgba(0, 0, 0, 0.15);
   }
 
-  .colab-reproduction-first {
-    float: left;
-    font-size: 9.5pt;
-  }
-
-  .colab-reproduction-inline {
-    line-height: 100%;
-    font-size: 8pt;
-  }
-
   .colab-preface {
     display: inline;
     margin-right: 1em;
@@ -91,7 +81,7 @@
 
     <p>And so, it’s rather surprising how little attention we actually give to looking at the weights of neural networks. There are a few exceptions to this, of course. It’s quite common for researchers to show pictures of the first layer weights in vision models (these are directly connected to RGB channels, so they’re easy to understand as images). In some work, especially historically, we see researchers reason about the weights of toy neural networks by hand. And we quite often see researchers discuss aggregate statistics of weights. But actually looking at the weights of a neural network other than the first layer is quite uncommon &ndash; to the best of our knowledge, mapping weights between hidden layers to meaningful algorithms is novel to the circuits project.</p>
 
-    <p><a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_" class="colab-reproduction colab-reproduction-first" target="_blank">Follow along in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook &rarr;</a></p>
+    <figure id="big-colab-button" class="fullscreen-diagram"></figure>
 
     <h2>What's the difference between visualizing activations, weights, and attributions?</h2>
 
@@ -140,8 +130,7 @@
           <a href="#figure-1" class="figure-number">1</a>:
           NMF of input weights in InceptionV1 <code>mixed4d_5x5</code>, for a selection of ten neurons. The red, green, and blue channels on each grid indicate the weights for each of the 3 NMF factors.
         </div>
-
-        <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=RHj5ZKx9Y1jX" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
+        <figure id="colab-button-1" class="fullscreen-diagram"></figure>
       </figcaption>
     </figure>
 
@@ -182,8 +171,7 @@
         <div class="colab-preface">
           <a href="#figure-3" class="figure-number">3</a>: Contextualizing weights.
         </div>
-
-        <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=PoMQF4UtPcAJ" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
+        <figure id="colab-button-2" class="fullscreen-diagram"></figure>
       </figcaption>
     </figure>
 
@@ -201,8 +189,7 @@
         <div class="colab-preface">
           <a href="#figure-4" class="figure-number">4</a>: Small multiple weights for <a href="https://microscope.openai.com/models/inceptionv1/mixed3b_0/342"><code>mixed3b</code> 342</a>.
         </div>
-
-        <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=PoMQF4UtPcAJ" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
+        <figure id="colab-button-3" class="fullscreen-diagram"></figure>
       </figcaption>
     </figure>
 
@@ -231,7 +218,7 @@
         <div class="colab-preface">
           <a href="#figure-6" class="figure-number">6</a>. <b>Left:</b> Feature visualization of a car neuron. <b>Right:</b> Feature visualizations of the vector over input neurons at each spatial position of the car neuron's weights. As we see, the car neuron broadly responds to window features above wheel features.
         </div>
-        <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=K8URGsjLmuUj" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
+        <figure id="colab-button-4" class="fullscreen-diagram"></figure>
       </figcaption>
     </figure>
 
@@ -253,7 +240,7 @@
                   class="legend-label inhibit">inhibitory</span>) connecting six high-low frequency detectors in InceptionV1 to the
           the layer <code>conv2d2</code>.
         </div>
-        <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=Z5Y7dAQZZAEf" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
+        <figure id="colab-button-5" class="fullscreen-diagram"></figure>
       </figcaption>
     </figure>
 
@@ -266,7 +253,7 @@
           <a href="#figure-8" class="figure-number">8</a>: Neurons (by their feature visualizations) that contribute to the two NMF factors from <a href="#figure-7">Figure 7</a>, plus the weighted amount they contribute to
           each factor.
         </div>
-        <a href="https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=Z5Y7dAQZZAEf" class="colab-reproduction colab-reproduction-inline" target="_blank">Reproduce in a <img src="images/colab.svg" class="colab-reproduction-logo"/> notebook</a>
+        <figure id="colab-button-6" class="fullscreen-diagram"></figure>
       </figcaption>
     </figure>
 
