@@ -28,12 +28,12 @@
 const notebooks = {
   lucid: {
     slug: "lucid",
-    url: "https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_#scrollTo=RHj5ZKx9Y1jX",
+    url: "https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_?usp=sharing",
     title: "Tensorflow (Lucid)"
   },
   captum: {
     slug: "captum",
-    url: "https://github.com/ProGamerGov/captum/blob/optim-wip-circuits/tutorials/optimviz/WeightVisualization_OptimViz.ipynb",
+    url: "https://colab.research.google.com/drive/10z-A4OUsSuKHwRw6Cayhss7Dtp5h1Q-7?usp=sharing",
     title: "PyTorch (Captum)"
   },
 };
