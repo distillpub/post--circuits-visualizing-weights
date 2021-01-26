@@ -28,7 +28,7 @@
 const notebooks = {
   lucid: {
     slug: "lucid",
-    url: "https://colab.research.google.com/drive/13UZ02rmNirhQ2WI6QSFH8MphZHeyPdA_?usp=sharing",
+    url: "https://colab.research.google.com/drive/19cmX6U70zovssqIbAJaWFUEWNu4AIZBF?usp=sharing",
     title: "Tensorflow (Lucid)"
   },
   captum: {
