@@ -28,7 +28,7 @@ const notebooks = {
   },
   captum: {
     slug: "captum",
-    url: "https://colab.research.google.com/drive/10z-A4OUsSuKHwRw6Cayhss7Dtp5h1Q-7?usp=sharing",
+    url: "https://colab.research.google.com/drive/1Zv7w03hOHfBWaEDMpSR1MA4D6IpAwZln?usp=sharing",
     title: "PyTorch (Captum)"
   },
 };
