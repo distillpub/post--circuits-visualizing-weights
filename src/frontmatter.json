@@ -44,9 +44,7 @@
 		},
 		{
 			"author": "Chris Olah",
-			"authorURL": "https://colah.github.io",
-			"affiliation": "OpenAI",
-			"affiliationURL": "https://openai.com"
+			"authorURL": "https://colah.github.io"
 		}
 	],
 	"katex": {
